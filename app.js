@@ -16,18 +16,7 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
       return res.status(400).send("No files were uploaded.");
     }
 
-    (function() {
-      var childProcess = require("child_process");
-      var oldSpawn = childProcess.spawn;
-      function mySpawn() {
-          console.log('spawn called');
-          console.log(arguments);
-          var result = oldSpawn.apply(this, arguments);
-          return result;
-      }
-      childProcess.spawn = mySpawn;
-  })();
-  
+
     function generateSummary(text) {
       const { spawn } = require('child_process');
       var summarizer = spawn("python", ["./test.py", "TEST"]);
@@ -45,11 +34,6 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
           res.end('');
       })
   
-      summarizer.on("close", (code) => {
-          console.log(`child process exited with code ${code}`);
-          res.write(code.toString());
-          res.end('');
-      })
   }
   
 
