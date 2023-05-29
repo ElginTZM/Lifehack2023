@@ -1,4 +1,10 @@
 {
+  "name": "lifehack2023",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
