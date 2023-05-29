@@ -15,6 +15,10 @@ body {
     justify-content: space-between;
 }
 
+#nav-bar a {
+    cursor: pointer;
+}
+
 #nav-bar-main {
     display: flex;
     flex-direction: column;
@@ -49,6 +53,7 @@ body {
     gap: 0.98vw;
     align-items: center;
     font-size: 2.99vh;
+    width: fit-content;
 }
 
 .nav-bar-link-icon {
