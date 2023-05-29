@@ -26,14 +26,6 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
           res.write(data.toString());
           res.end('');
       })
-  
-      summarizer.stderr.on("data", (data) => {
-          console.log(`stderr: ${data}`);
-          // res.send(data);
-          res.write(data.toString());
-          res.end('');
-      })
-  
   }
   
 
