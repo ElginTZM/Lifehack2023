@@ -31,7 +31,7 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
         summarize({ text }).then((summary) => {
           var result = "";
           for (let i = 0; i < summary.extractive.length; i++) {
-            result += summary.extractive[i];
+            result += summary.extractive[i] + " ";
           }
           res.send(JSON.stringify(result, null, 2));
         });
