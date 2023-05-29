@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "preinstall": "pip install -r ./requirements.txt",
     "start": "node ./bin/www"
   },
   "dependencies": {
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
-    "pdf2json": "^3.0.4"
+    "pdf2json": "^3.0.4",
+    "textract": "^2.5.0"
   }
 }

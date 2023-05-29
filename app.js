@@ -1,53 +1,73 @@
-var express = require('express');
-var fileUpload = require("express-fileupload")
+var express = require("express");
+var fileUpload = require("express-fileupload");
 var PDFParser = import("pdf2json");
+var textract = require("textract");
 
 var app = express();
 app.use(fileUpload());
 
-app.get('/', (req, res) => {
-    res.sendFile('./templates/index.html', {root: __dirname});
+app.get("/", (req, res) => {
+  res.sendFile("./templates/index.html", { root: __dirname });
 });
 
-// app.get("/summary", printhello);
-
-// function printhello() {
-//     const { spawn } = require('child_process');
-//     var summarizer = spawn("py", ["--version"]);
-
-//     summarizer.stdout.on("data", (data) => {
-//         console.log(`stdout: ${data}`);
-//     })
-
-//     summarizer.stderr.on("data", (data) => {
-//         console.log(`stderr: ${data}`);
-//     })
-
-//     summarizer.on("close", (code) => {
-//         console.log(`child process exited with code ${code}`);
-//     })
-// }
-
 Promise.all([PDFParser]).then(([PDFParser]) => {
-  app.post('/parsePDF', (req, res) => {
-      if (!req.files) {
-          return res.status(400).send('No files were uploaded.');
-      }
+  app.post("/parsePDF", (req, res) => {
+    if (!req.files) {
+      return res.status(400).send("No files were uploaded.");
+    }
+    function generateSummary(text) {
+      const { spawn } = require('child_process');
+      var summarizer = spawn("python", ["./test.py", text]);
+  
+      summarizer.stdout.on("data", (data) => {
+          // console.log(`stdout: ${data}`);
+          res.write(data.toString());
+          res.end('');
+      })
+  
+      summarizer.stderr.on("data", (data) => {
+          console.log(`stderr: ${data}`);
+          // res.send(data);
+          res.write(data.toString());
+          res.end('');
+      })
+  
+      summarizer.on("close", (code) => {
+          console.log(`child process exited with code ${code}`);
+          res.write(code.toString());
+          res.end('');
+      })
+  }
+  
 
-      let file = req.files.uploadFile;
+    let file = req.files.uploadFile;
+    console.log(file.mimetype);
+    if (file.mimetype === "application/pdf") {
       let regex = /(----------------Page \(\w\) Break----------------)/g;
 
       const pdfParser = new PDFParser.default(this, 1);
-      pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
-      pdfParser.on("pdfParser_dataReady", pdfData => {
-          res.send(pdfParser.getRawTextContent().replace(regex, ""));
+      pdfParser.on("pdfParser_dataError", (errData) =>
+        console.error(errData.parserError)
+      );
+      pdfParser.on("pdfParser_dataReady", (pdfData) => {
+        generateSummary(pdfParser.getRawTextContent().replace(regex, ""));
       });
-  
+
       pdfParser.parseBuffer(file.data);
+    } else {
+      textract.fromBufferWithMime(
+        file.mimetype,
+        file.data,
+        function (error, text) {
+          if (error) {
+            res.send(error);
+          } else {
+            generateSummary(text);
+          }
+        }
+      );
+    }
   });
 });
 
 module.exports = app;
-
-const port = 3000;
-app.listen(port, () => console.log("Listening for requests on port 3000"));
