@@ -56,7 +56,7 @@ function UploadInterface() {
                     <label for="document" class="drop-container">
                         <span class="drop-title">
                             <div className="drop-display">{dropDisplay}</div>
-                            <button type='button' onClick={submitPDF} style={btnStyle}>Upload</button>
+                            <div><button type='button' onClick={submitPDF} style={btnStyle}>Upload</button></div>
                             <div style={{display: displayMessage ? "inline-block" : "none"}}>Please wait a moment ...</div>
                         </span>
                         <input type="file" id="document" 
