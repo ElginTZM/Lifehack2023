@@ -70,7 +70,7 @@
     padding-left: 2vw;
     padding-right: 2vw;
     border: solid;
-    border-color: rgb(0, 0, 255);
+    border-color: #9FBF9B;
     border-width: 2px;
     border-radius: 5px;
     background-color: white;
@@ -78,6 +78,6 @@
 }
 
 .submit-text-btn:hover {
-    border-color: rgba(0, 0, 255, 0.4);
+    border-color: rgb(0, 0, 255);
     outline-offset: -1px;
 }

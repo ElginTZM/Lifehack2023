@@ -1,17 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll("#nav-bar-links .nav-bar-link");
-    const tabs = document.querySelectorAll('#content .content-tab');
 
-    var tabOpening = 0;
-    
     // hide all the tabs except current one
-    tabs.forEach(tab => tab.style.display = 'none');
-    tabs[tabOpening].style.display = 'block';
+    switchTab(0);
 
     // event listener for all tabs
     buttons.forEach((button, index) => button.addEventListener('click', () => {
-        tabs[tabOpening].style.display = 'none';
-        tabOpening = index;
-        tabs[tabOpening].style.display = 'block';
+        switchTab(index);
+        if (index === 1) {
+            documentManager.newDocument();
+        } else {
+            documentManager.switchAway();
+        }
     }));
 });
+
+
+function switchTab(index) {
+    const tabs = document.querySelectorAll('#content .content-tab');
+    const buttons = document.querySelectorAll("#nav-bar-links .nav-bar-link");
+    tabs.forEach(tab => tab.style.display = 'none');
+    tabs[index].style.display = 'block';
+    buttons.forEach(button => button.style.color = "black");
+    buttons[index].style.color = "chocolate";
+}

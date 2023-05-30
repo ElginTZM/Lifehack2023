@@ -1,0 +1,24 @@
+.upload-listing {
+    border: solid;
+    border-width: 1px;
+    border-color: #9FBF9B;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    border-radius: 5px;
+    height: 6vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.arrow line {
+    stroke: #9FBF9B;
+    stroke-width: 2px;
+}

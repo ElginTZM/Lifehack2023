@@ -1,7 +1,7 @@
 function ViewDocument(props) {
-    const [textInput, setTextInput] = React.useState('');
-    const [title, setTitle] = React.useState('');
-    const [summary, setSummary] = React.useState('Summary will appear here once you press submit.');
+    const [textInput, setTextInput] = React.useState(props.text);
+    const [title, setTitle] = React.useState(props.title);
+    const [summary, setSummary] = React.useState(props.summary);
 
     function submit() {
         const formData = new FormData();
@@ -14,19 +14,22 @@ function ViewDocument(props) {
             body: formData
         })
             .then(response => response.json())
-            .then(response => setSummary(response.summary));
+            .then(response => {
+                setSummary(response.summary);
+                documentManager.addDocument(title, textInput, response.summary);
+            });
     }
 
     return (
         <div className="view-document">
             <div className="original-text">
                 <div className="top-bar">
-                    <input type="text" placeholder="Title" className="title-input" onChange={(event) => {
+                    <input type="text" placeholder="Title" className="title-input" value={title} onChange={(event) => {
                         setTitle(event.target.value);
                     }} />
                 </div>
                 <div className="text-content original-text-content">
-                    <textarea placeholder="Input text here ..." className="original-text-input" onChange={(event) => {
+                    <textarea placeholder="Input text here ..." className="original-text-input" value={textInput} onChange={(event) => {
                         setTextInput(event.target.value);
                     }}></textarea>
                     <div className="submit-text-div">
@@ -42,12 +45,47 @@ function ViewDocument(props) {
     );
 }
 
-const a = <ViewDocument new={false}/>;
+const documentManager = {
+    isNewDocument: true,
+    documents: [],
+    pageDOM: document.querySelector("#content-view-document"),
+    container: null,
+    documentIndex: 0,
 
-function test() {
-    console.log("test function");
+    addDocument(title, text, summary) {
+        const documentInfo = {
+            title: title,
+            text: text,
+            summary: summary
+        }
+        if (this.isNewDocument) {
+            this.documents.push(documentInfo);
+            listingManager.addToListing(title, this.documents.length - 1);
+            this.isNewDocument = false;
+        } else {
+            this.documents[this.documentIndex] = documentInfo;
+            listingManager.changeListing(this.documentIndex, title);
+        }
+    },
+
+    switchAway() {
+        this.pageDOM.removeChild(this.container);
+    },
+
+    newDocument(title='', text='') {
+        this.isNewDocument = true;
+        this.documentIndex = this.documents.length;
+        this.container = document.createElement('div');
+        ReactDOM.render(<ViewDocument title={title} text={text} summary='Summary will appear here once you press submit.'/>, this.container);
+        this.pageDOM.appendChild(this.container);
+    },
+
+    viewDocument(index) {
+        this.isNewDocument = false;
+        this.documentIndex = index;
+        const documentInfo = this.documents[index];
+        this.container = document.createElement('div');
+        ReactDOM.render(<ViewDocument title={documentInfo.title} text={documentInfo.text} summary={documentInfo.summary}/>, this.container);
+        this.pageDOM.appendChild(this.container);
+    }
 }
-
-ReactDOM.render(a, document.querySelector("#content-view-document"));
-ReactDOM.render(a, document.querySelector("#content-view-document"));
-ReactDOM.render(a, document.querySelector("#content-view-document"));
