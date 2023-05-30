@@ -69,7 +69,9 @@ const documentManager = {
     },
 
     switchAway() {
-        this.pageDOM.removeChild(this.container);
+        if (this.pageDOM.childElementCount > 0) {
+            this.pageDOM.removeChild(this.container);
+        }
     },
 
     newDocument(title='', text='', summary='Summary will appear here once you press submit.', createListing=false) {
