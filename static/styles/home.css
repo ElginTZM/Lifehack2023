@@ -2,18 +2,30 @@ body {
     font-family: "Gill Sans", sans-serif;
 }
 
+#content-home {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    box-sizing: border-box;
+}
+
+
 .background {
     background-color: #E8E8E8;
     min-height: 100vh;
 }
+
 .all-documents {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    gap: 2vw;
 }
+
 .today {
     justify-content: space-around;
     align-items: start;
 }
+
 .button {
     background-color: #9FBF9B;
     border: none;
@@ -26,6 +38,7 @@ body {
     margin: 4px 2px;
     cursor: pointer;
 }
+
 .box {
     background-color: #9FBF9B;
     border: none;
@@ -37,6 +50,7 @@ body {
     font-size: 16px;
     margin: 4px 2px;
 }
+
 .drop-container {
     position: relative;
     display: flex;
@@ -52,6 +66,7 @@ body {
     cursor: pointer;
     /* transition: background .2s ease-in-out, border .2s ease-in-out; */
 }
+
 .cheatsheet-button {
     background-color: #9FBF9B;
     border: none;
@@ -64,9 +79,11 @@ body {
     margin: 4px 2px;
     cursor: pointer;
 }
+
 .searchbox > form > input{
     width: 95%; 
 }
+
 input[type="file"] {
     display: none;
 }

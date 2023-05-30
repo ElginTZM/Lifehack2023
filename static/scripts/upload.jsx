@@ -51,7 +51,7 @@ function UploadInterface() {
                     <hr></hr>
                 </div>
                 <div class="box">
-                    <a href="#" class="button">Upload Document</a>
+                    <div class="button">Upload Document</div>
 
                     <label for="document" class="drop-container">
                         <span class="drop-title">
@@ -67,7 +67,7 @@ function UploadInterface() {
                     <p>.pdf/word</p>
                 </div>
                 <div class="box">
-                    <a href="#" class="button">Upload Video</a>
+                    <div class="button">Upload Video</div>
                     <label for="video" class="drop-container">
                         <span class="drop-title">choose file</span>
                         <input type="file" id="document" 
