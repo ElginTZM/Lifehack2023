@@ -2,8 +2,56 @@
 <html>
     <head>
         <title>Life Hack</title>
+        <link rel="stylesheet" href="/styles/nav-bar.css">
+        <link rel="stylesheet" href="/styles/view_document.css">
+        <link rel="stylesheet" href="/styles/add_upload.css">
+        <link rel="stylesheet" href="/styles/home.css">
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="/scripts/switch-tab.js"></script>
     </head>
     <body>
-        <h2>Hello, World!</h2>
+        <div id="nav-bar">
+            <div id="nav-bar-main">
+                <div id="nav-bar-title">
+                    <div id="nav-bar-title-img">
+                        <img src="/media/lotus-icon.jpg">
+                    </div>
+                    <div id="nav-bar-title-text">Summarised</div>
+                </div>
+                <div id="nav-bar-links">
+                    <a class="nav-bar-link" id="my-summaries-link">
+                        <div class="nav-bar-link-icon">
+                            <img src="/media/home-icon.png">
+                        </div>
+                        <div class="nav-bar-link-text">My Summaries</div>
+                    </a>
+                    <a class="nav-bar-link" id="trash-link">
+                        <div class="nav-bar-link-icon">
+                            <img src="/media/doc-icon.png">
+                        </div>
+                        <div class="nav-bar-link-text">View Document</div>
+                    </a>
+                </div>
+            </div>
+            <div id="nav-bar-support">
+                <div id="nav-bar-support-icon">
+                    <img src="/media/support-icon.png">
+                </div>
+                <div id="nav-bar-support-text">Support</div>
+            </div>
+        </div>
+        <div id="content">
+            <div class='content-tab background' id="content-home">
+                <div id="upload-document"></div>
+                <script type="text/babel" src="/scripts/upload.jsx"></script>
+                <h3>My Summaries</h3>
+                <div id="summary-listing"></div>
+                <script type="text/babel" src="/scripts/add_upload.jsx"></script>
+            </div>
+            <div class='content-tab' id="content-view-document"></div>
+            <script type="text/babel" src="/scripts/view_document.jsx"></script>
+        </div>
     </body>
 </html>

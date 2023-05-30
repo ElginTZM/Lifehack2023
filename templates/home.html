@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="/scripts/switch-tab.js"></script>
+        <script type='text/babel' src=''></script>
+        <style>
+            .background {
+                background-color: #E8E8E8; 
+                font-family: "Gill Sans", sans-serif; 
+            }
+            .all-documents {
+                display: flex;
+                justify-content: space-around;
+            }
+            .today {
+                justify-content: space-around;
+                align-items: start;
+            }
+            .button {
+                background-color: #9FBF9B;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 25px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+            .box {
+                background-color: #9FBF9B;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+            }
+            .drop-container {
+                position: relative;
+                display: flex;
+                gap: 10px;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 80px;
+                padding: 20px;
+                border-radius: 10px;
+                border: 2px dashed #555;
+                color: #444;
+                cursor: pointer;
+                transition: background .2s ease-in-out, border .2s ease-in-out;
+            }
+            .cheatsheet-button {
+                background-color: #9FBF9B;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+            .searchbox > form > input{
+                width: 95%; 
+            }
+            input[type="file"] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body class="background">
+        <div class="searchbox">
+            <form>
+                <input type="text" placeholder=" Search ..." name="search">
+            </form>
+        </div>
+
+        <h2>All documents</h2>
+
+        <div class="all-documents">
+            <div class="box">
+                <a href="#" class="button">New Text File</a>
+                <hr>
+                <p>.pdf/word</p>
+            </div>
+            <div class="box">
+                <a href="#" class="button">Upload Document</a>
+
+                <label for="document" class="drop-container">
+                    <span class="drop-title">choose file</span>
+                    <input type="file" id="document" 
+                        accept="application/msword, application/vnd.ms-powerpoint,
+                    text/plain, application/pdf" required>
+                </label>
+
+                <hr>
+                <p>.pdf/word</p>
+            </div>
+            <div class="box">
+                <a href="#" class="button">Upload Video</a>
+                <label for="video" class="drop-container">
+                    <span class="drop-title">choose file</span>
+                    <input type="file" id="document" 
+                        accept=".mp4" required>
+                </label>
+                <hr>
+                <p>.mp4/link</p>
+            </div>
+        </div>
+
+        <h3>Today</h3>
+
+        <div class="today">
+            <div class="box">
+                <a href="#" class="button">Demo Document</a>
+                <hr>
+                <a href="#" class="cheatsheet-button">cheatsheet</a>
+            </div>
+        </div>
+    </body>
+</html>
