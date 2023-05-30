@@ -6,7 +6,7 @@ app.use(express.static('static'));
 console.log("start");
 
 app.get('/', (req, res) => {
-    res.sendFile('./templates/index.html', {root: __dirname});
+    res.sendFile('./templates/home.html', {root: __dirname});
 });
 
 app.post('/summary', (req, res) => {
