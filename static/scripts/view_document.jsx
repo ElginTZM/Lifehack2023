@@ -72,12 +72,15 @@ const documentManager = {
         this.pageDOM.removeChild(this.container);
     },
 
-    newDocument(title='', text='') {
+    newDocument(title='', text='', summary='Summary will appear here once you press submit.', createListing=false) {
         this.isNewDocument = true;
         this.documentIndex = this.documents.length;
         this.container = document.createElement('div');
-        ReactDOM.render(<ViewDocument title={title} text={text} summary='Summary will appear here once you press submit.'/>, this.container);
+        ReactDOM.render(<ViewDocument title={title} text={text} summary={summary} />, this.container);
         this.pageDOM.appendChild(this.container);
+        if (createListing) {
+            this.addDocument(title, text, summary);
+        }
     },
 
     viewDocument(index) {
@@ -87,5 +90,13 @@ const documentManager = {
         this.container = document.createElement('div');
         ReactDOM.render(<ViewDocument title={documentInfo.title} text={documentInfo.text} summary={documentInfo.summary}/>, this.container);
         this.pageDOM.appendChild(this.container);
+    },
+
+    viewCurrent() {
+        if (this.documentIndex === this.documents.length) {
+            this.newDocument();
+        } else {
+            this.viewDocument(this.documentIndex);
+        }
     }
 }

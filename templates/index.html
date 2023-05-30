@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="/styles/nav-bar.css">
         <link rel="stylesheet" href="/styles/view_document.css">
         <link rel="stylesheet" href="/styles/add_upload.css">
+        <link rel="stylesheet" href="/styles/home.css">
         <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -42,8 +43,10 @@
             </div>
         </div>
         <div id="content">
-            <div class='content-tab' id="content-home">
+            <div class='content-tab background' id="content-home">
                 <div id="upload-document"></div>
+                <script type="text/babel" src="/scripts/upload.jsx"></script>
+                <h3>My Summaries</h3>
                 <div id="summary-listing"></div>
                 <script type="text/babel" src="/scripts/add_upload.jsx"></script>
             </div>

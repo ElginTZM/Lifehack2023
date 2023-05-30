@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttons.forEach((button, index) => button.addEventListener('click', () => {
         switchTab(index);
         if (index === 1) {
-            documentManager.newDocument();
+            documentManager.viewCurrent();
         } else {
             documentManager.switchAway();
         }
