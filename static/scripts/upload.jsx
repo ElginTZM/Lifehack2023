@@ -23,9 +23,6 @@ function UploadInterface() {
         formData.append('file', file);
         fetch('/file_summary', {
             method: 'POST',
-            headers: {
-                "content-type": "multipart/form-data"
-            },
             body: formData
         })
             .then(response => response.json())

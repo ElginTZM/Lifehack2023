@@ -1,9 +1,20 @@
 {
+  "name": "lifehack2023",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "ejs": "^3.1.9",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "pdf2json": "^3.0.4",
+    "text-summarization": "^1.0.4",
+    "textract": "^2.5.0"
   }
 }

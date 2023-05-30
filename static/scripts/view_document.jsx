@@ -8,9 +8,6 @@ function ViewDocument(props) {
         formData.append('text-input', textInput);
         fetch("/summary", {
             method: "POST",
-            headers: {
-                "content-type": "multipart/form-data"
-            },
             body: formData
         })
             .then(response => response.json())
