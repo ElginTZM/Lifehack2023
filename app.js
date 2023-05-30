@@ -3,7 +3,6 @@ var fileUpload = require("express-fileupload");
 var PDFParser = import("pdf2json");
 var textract = require("textract");
 var summarize = require("text-summarization");
-var SummarizerManager = require("node-summarizer").SummarizerManager;
 
 var app = express();
 app.use(fileUpload());
@@ -35,12 +34,6 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
           }
           res.send(JSON.stringify(result, null, 2));
         });
-        /* 
-        let Summarizer = new SummarizerManager(text, 5); 
-        let summary = Summarizer.getSummaryByRank().then((summaryObject) => {
-          res.send(JSON.stringify(summaryObject.summary, null, 2));
-        });
-        */
       });
 
       pdfParser.parseBuffer(file.data);
@@ -59,12 +52,6 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
               }
               res.send(JSON.stringify(result, null, 2));
             });
-            /*
-            let Summarizer = new SummarizerManager(filteredText, 5); 
-            let summary = Summarizer.getSummaryByRank().then((summaryObject) => {
-              res.send(JSON.stringify(summaryObject.summary, null, 2));
-            });
-            */
           }
         }
       );
