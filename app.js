@@ -45,7 +45,10 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
           for (let i = 0; i < summary.extractive.length; i++) {
             result += summary.extractive[i] + " ";
           }
-          res.json({summary: JSON.stringify(result, null, 2)});
+          res.json({
+            'input-text': text,
+            summary: JSON.stringify(result, null, 2)
+          });
         });
       });
 
@@ -56,14 +59,20 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
         file.buffer,
         function (error, text) {
           if (error) {
-            res.send("Error processing file.");
+            res.json({
+              'input-text': text,
+              summary: "Error processing file."
+            });
           } else {
             summarize({ text }).then((summary) => {
               let result = "";
               for (let i = 0; i < summary.extractive.length; i++) {
                 result += summary.extractive[i] + " ";
               }
-              res.json({summary: JSON.stringify(result, null, 2)});
+              res.json({
+                'input-text': text,
+                summary: JSON.stringify(result, null, 2)
+              });
             });
           }
         }
@@ -72,4 +81,5 @@ Promise.all([PDFParser]).then(([PDFParser]) => {
   });
 });
 
-module.exports = app;
+// module.exports = app;
+app.listen(3000);

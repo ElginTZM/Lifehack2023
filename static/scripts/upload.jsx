@@ -3,7 +3,8 @@ function UploadInterface() {
     const [dropDisplay, setDropDisplay] = React.useState('choose file');
     const [btnStyle, setBtnStyle] = React.useState({
         display: 'none'
-    })
+    });
+    const [displayMessage, setDisplayMessage] = React.useState(false);
 
     function newTextInput() {
         switchTab(1);
@@ -19,6 +20,7 @@ function UploadInterface() {
     }
 
     function submitPDF() {
+        setDisplayMessage(true);
         const formData = new FormData();
         formData.append('file', file);
         fetch('/file_summary', {
@@ -27,6 +29,7 @@ function UploadInterface() {
         })
             .then(response => response.json())
             .then(response => {
+                setDisplayMessage(false);
                 switchTab(1);
                 documentManager.newDocument(dropDisplay, response["input-text"], response.summary, true);
             });
@@ -54,6 +57,7 @@ function UploadInterface() {
                         <span class="drop-title">
                             <div className="drop-display">{dropDisplay}</div>
                             <button type='button' onClick={submitPDF} style={btnStyle}>Upload</button>
+                            <div style={{display: displayMessage ? "inline-block" : "none"}}>Please wait a moment ...</div>
                         </span>
                         <input type="file" id="document" 
                             accept="application/msword, application/vnd.ms-powerpoint,
